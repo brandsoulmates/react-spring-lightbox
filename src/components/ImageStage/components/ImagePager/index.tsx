@@ -212,14 +212,19 @@ const ImagePager = ({
                                     e.nativeEvent.stopImmediatePropagation();
                                 }}
                             >
-                                <Image
-                                    imgProps={images[i]}
-                                    isCurrentImage={i === currentIndex}
-                                    pagerHeight={pagerHeight}
-                                    pagerIsDragging={isDragging}
-                                    setDisableDrag={setDisableDrag}
-                                    singleClickToZoom={singleClickToZoom}
-                                />
+                                {images[i]?.type === 'video' ? (
+                                    <div>{images[i]?.component}</div>
+                                ) : (
+                                    <Image
+                                        imgProps={images[i]}
+                                        isCurrentImage={i === currentIndex}
+                                        pagerHeight={pagerHeight}
+                                        pagerIsDragging={isDragging}
+                                        setDisableDrag={setDisableDrag}
+                                        singleClickToZoom={singleClickToZoom}
+                                    />
+                                )}
+
                                 {renderImageOverlay()}
                             </ImageContainer>
                         </PagerInnerContentWrapper>
