@@ -216,7 +216,7 @@ const ImagePager = ({
                             >
                                 {images[i]?.type === 'video' ? (
                                     <div
-                                        onClickCapture={(e) => {
+                                        onClick={(e) => {
                                             console.log('click capture no');
 
                                             e.preventDefault();
@@ -224,13 +224,13 @@ const ImagePager = ({
                                             e.nativeEvent.stopImmediatePropagation();
                                             return false;
                                         }}
-                                        onMouseDownCapture={(e) => {
+                                        onMouseDown={(e) => {
                                             console.log('mouse down capture');
                                             isDraggingRef.current = true;
                                             e.preventDefault();
                                             e.stopPropagation();
                                         }}
-                                        onMouseUpCapture={(e) => {
+                                        onMouseUp={(e) => {
                                             console.log('mouse up capture');
                                             isDraggingRef.current = isDragging;
                                             e.preventDefault();
