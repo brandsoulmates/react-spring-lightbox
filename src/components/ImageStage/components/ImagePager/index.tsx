@@ -228,7 +228,7 @@ const ImagePager = ({
                                             isDraggingRef.current = true;
                                             e.preventDefault();
                                         }}
-                                        onMouseUpCapture={() => {
+                                        onMouseUpCapture={(e) => {
                                             console.log(
                                                 'mouse up capture preventing default'
                                             );
