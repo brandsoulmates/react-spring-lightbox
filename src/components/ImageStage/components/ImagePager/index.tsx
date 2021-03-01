@@ -208,27 +208,33 @@ const ImagePager = ({
                 >
                     <PagerContentWrapper>
                         <PagerInnerContentWrapper>
-                            <ImageContainer>
+                            <ImageContainer
+                            // onClick={(e) => {
+                            //     e.stopPropagation();
+                            //     e.nativeEvent.stopImmediatePropagation();
+                            // }}
+                            >
                                 {images[i]?.type === 'video' ? (
                                     <div
                                         onClickCapture={(e) => {
-                                            console.log(
-                                                'click capture no conditionals'
-                                            );
+                                            console.log('click capture no');
 
                                             e.preventDefault();
+                                            e.stopPropagation();
+                                            e.nativeEvent.stopImmediatePropagation();
+                                            return false;
                                         }}
                                         onMouseDownCapture={(e) => {
                                             console.log('mouse down capture');
                                             isDraggingRef.current = true;
                                             e.preventDefault();
+                                            e.stopPropagation();
                                         }}
                                         onMouseUpCapture={(e) => {
-                                            console.log(
-                                                'mouse up capture preventing default'
-                                            );
+                                            console.log('mouse up capture');
                                             isDraggingRef.current = isDragging;
                                             e.preventDefault();
+                                            e.stopPropagation();
                                         }}
                                     >
                                         {images[i]?.component}
