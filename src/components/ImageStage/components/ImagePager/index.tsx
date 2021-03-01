@@ -45,6 +45,7 @@ const ImagePager = ({
     const [disableDrag, setDisableDrag] = useState<boolean>(false);
     const [pagerHeight, setPagerHeight] = useState<'100%' | number>('100%');
     const [isDragging, setIsDragging] = useState<boolean>(false);
+    const isDraggingRef = useRef(false);
     console.log('Dragging lightbox ', isDragging);
 
     // Generate page positions based on current index
@@ -216,11 +217,21 @@ const ImagePager = ({
                                 {images[i]?.type === 'video' ? (
                                     <div
                                         onClickCapture={(e) => {
-                                            if (isDragging) {
+                                            console.log('click capture');
+                                            if (isDraggingRef.current) {
                                                 e.preventDefault();
                                                 e.stopPropagation();
                                                 e.nativeEvent.stopImmediatePropagation();
                                             }
+                                        }}
+                                        onMouseDownCapture={(e) => {
+                                            console.log('mouse down capture');
+                                            isDraggingRef.current = true;
+                                            e.preventDefault();
+                                        }}
+                                        onMouseUpCapture={() => {
+                                            console.log('mouse up capture');
+                                            isDraggingRef.current = isDragging;
                                         }}
                                     >
                                         {images[i]?.component}
