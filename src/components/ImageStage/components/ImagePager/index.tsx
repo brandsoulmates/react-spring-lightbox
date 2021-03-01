@@ -222,8 +222,6 @@ const ImagePager = ({
                                             );
 
                                             e.preventDefault();
-                                            e.stopPropagation();
-                                            e.nativeEvent.stopImmediatePropagation();
                                         }}
                                         onMouseDownCapture={(e) => {
                                             console.log('mouse down capture');
@@ -231,8 +229,11 @@ const ImagePager = ({
                                             e.preventDefault();
                                         }}
                                         onMouseUpCapture={() => {
-                                            console.log('mouse up capture');
+                                            console.log(
+                                                'mouse up capture preventing default'
+                                            );
                                             isDraggingRef.current = isDragging;
+                                            e.preventDefault();
                                         }}
                                     >
                                         {images[i]?.component}
