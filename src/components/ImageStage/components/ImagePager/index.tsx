@@ -213,7 +213,17 @@ const ImagePager = ({
                                 }}
                             >
                                 {images[i]?.type === 'video' ? (
-                                    <div>{images[i]?.component}</div>
+                                    <div
+                                        onClickCapture={(e) => {
+                                            if (isDragging) {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                e.nativeEvent.stopImmediatePropagation();
+                                            }
+                                        }}
+                                    >
+                                        {images[i]?.component}
+                                    </div>
                                 ) : (
                                     <Image
                                         imgProps={images[i]}
