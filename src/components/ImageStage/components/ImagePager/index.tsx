@@ -217,7 +217,9 @@ const ImagePager = ({
                                 {images[i]?.type === 'video' ? (
                                     <div
                                         onClickCapture={(e) => {
-                                            console.log('click capture');
+                                            console.log(
+                                                'click capture no conditionals'
+                                            );
 
                                             e.preventDefault();
                                             e.stopPropagation();
