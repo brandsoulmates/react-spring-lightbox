@@ -218,11 +218,10 @@ const ImagePager = ({
                                     <div
                                         onClickCapture={(e) => {
                                             console.log('click capture');
-                                            if (isDraggingRef.current) {
-                                                e.preventDefault();
-                                                e.stopPropagation();
-                                                e.nativeEvent.stopImmediatePropagation();
-                                            }
+
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            e.nativeEvent.stopImmediatePropagation();
                                         }}
                                         onMouseDownCapture={(e) => {
                                             console.log('mouse down capture');
