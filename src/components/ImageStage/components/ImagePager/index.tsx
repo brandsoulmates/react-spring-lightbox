@@ -208,12 +208,7 @@ const ImagePager = ({
                 >
                     <PagerContentWrapper>
                         <PagerInnerContentWrapper>
-                            <ImageContainer
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    e.nativeEvent.stopImmediatePropagation();
-                                }}
-                            >
+                            <ImageContainer>
                                 {images[i]?.type === 'video' ? (
                                     <div
                                         onClickCapture={(e) => {
