@@ -45,6 +45,7 @@ const ImagePager = ({
     const [disableDrag, setDisableDrag] = useState<boolean>(false);
     const [pagerHeight, setPagerHeight] = useState<'100%' | number>('100%');
     const [isDragging, setIsDragging] = useState<boolean>(false);
+    console.log('Dragging lightbox ', isDragging);
 
     // Generate page positions based on current index
     const getPagePositions = (i: number, down = false, xDelta = 0) => {
