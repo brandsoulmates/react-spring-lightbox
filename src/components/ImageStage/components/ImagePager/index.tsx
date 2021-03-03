@@ -254,10 +254,6 @@ const PagerInnerContentWrapper = styled.div`
     align-items: center;
 `;
 
-const VideoContainer = styled.div<Pick<{ isDragging: boolean }, 'isDragging'>>`
-    ${({ isDragging }) => isDragging && 'pointer-event: none;'}
-`;
-
 const PagerContentWrapper = styled.div`
     width: 100%;
     display: flex;
