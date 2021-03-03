@@ -39,7 +39,9 @@ const Video = ({ component, pagerIsDragging }: VideoProps) => {
     return (
         <div
             onClickCapture={(e) => {
-                console.log('video click capture');
+                console.log('video click capture preventing default');
+                e.stopPropagation();
+                e.preventDefault();
                 if (isDragging.current) {
                     console.log('video click capture is dragging');
                     e.stopPropagation();
