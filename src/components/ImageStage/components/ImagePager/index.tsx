@@ -201,6 +201,7 @@ const ImagePager = ({
                             images[i]?.type === 'video' &&
                             Math.abs(x.getValue()) < 1
                         ) {
+                            console.log('onclick captured');
                             e.stopPropagation();
                             e.nativeEvent.stopImmediatePropagation();
                             e.preventDefault();
@@ -225,17 +226,9 @@ const ImagePager = ({
                                 }}
                             >
                                 {images[i]?.type === 'video' ? (
-                                    <div
-                                        onClick={(
-                                            e: React.MouseEvent<HTMLImageElement>
-                                        ) => {
-                                            // Don't close lighbox when clicking image
-                                            e.stopPropagation();
-                                            e.nativeEvent.stopImmediatePropagation();
-                                        }}
-                                    >
+                                    <VideoContainer isDragging={isDragging}>
                                         {images[i]?.component}
-                                    </div>
+                                    </VideoContainer>
                                 ) : (
                                     <Image
                                         imgProps={images[i]}
@@ -265,6 +258,10 @@ const PagerInnerContentWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+`;
+
+const VideoContainer = styled.div<Pick<{ isDragging: boolean }, 'isDragging'>>`
+    ${({ isDragging }) => isDragging && 'pointer-event: none;'}
 `;
 
 const PagerContentWrapper = styled.div`
