@@ -41,16 +41,22 @@ const Video = ({ component, pagerIsDragging }: VideoProps) => {
     return (
         <div
             onClickCapture={(e) => {
+                console.log('video click capture');
                 if (isDragging.current) {
-                    console.log('video click capture');
+                    console.log('video click capture is dragging');
                     e.stopPropagation();
                     e.preventDefault();
                 }
             }}
             onMouseDownCapture={(e) => {
+                isDragging.current = true;
                 console.log('video mouse down capture');
                 e.preventDefault();
                 e.stopPropagation();
+            }}
+            onMouseUpCapture={(e) => {
+                console.log('video mouse up capture');
+                isDragging.current = pagerIsDragging;
             }}
         >
             {component}
