@@ -41,6 +41,7 @@ const Video = ({ component, pagerIsDragging }: VideoProps) => {
     useDoubleClick({
         ['onSingleClick']: (e: MouseEvent) => {
             if (pagerIsDragging) {
+                console.log("IT'S CLICKING");
                 e.stopPropagation();
                 return;
             }
