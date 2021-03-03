@@ -45,7 +45,7 @@ const ImagePager = ({
     const [disableDrag, setDisableDrag] = useState<boolean>(false);
     const [pagerHeight, setPagerHeight] = useState<'100%' | number>('100%');
     const [isDragging, setIsDragging] = useState<boolean>(false);
-    const isDraggingRef = useRef(false);
+
     console.log('Dragging lightbox ', isDragging);
 
     // Generate page positions based on current index
@@ -196,6 +196,16 @@ const ImagePager = ({
                     onClick={() =>
                         Math.abs(x.getValue()) < 1 && !disableDrag && onClose()
                     }
+                    onClickCapture={(e: React.MouseEvent<HTMLImageElement>) => {
+                        if (
+                            images[i]?.type === 'video' &&
+                            Math.abs(x.getValue()) < 1
+                        ) {
+                            e.stopPropagation();
+                            e.nativeEvent.stopImmediatePropagation();
+                            e.preventDefault();
+                        }
+                    }}
                     ref={imageStageRef.current[i]}
                     role="presentation"
                     // @ts-ignore
@@ -209,32 +219,19 @@ const ImagePager = ({
                     <PagerContentWrapper>
                         <PagerInnerContentWrapper>
                             <ImageContainer
-                            // onClick={(e) => {
-                            //     e.stopPropagation();
-                            //     e.nativeEvent.stopImmediatePropagation();
-                            // }}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    e.nativeEvent.stopImmediatePropagation();
+                                }}
                             >
                                 {images[i]?.type === 'video' ? (
                                     <div
-                                        onClick={(e) => {
-                                            console.log('click capture no');
-
-                                            e.preventDefault();
+                                        onClick={(
+                                            e: React.MouseEvent<HTMLImageElement>
+                                        ) => {
+                                            // Don't close lighbox when clicking image
                                             e.stopPropagation();
                                             e.nativeEvent.stopImmediatePropagation();
-                                            return false;
-                                        }}
-                                        onMouseDown={(e) => {
-                                            console.log('mouse down capture');
-                                            isDraggingRef.current = true;
-                                            e.preventDefault();
-                                            e.stopPropagation();
-                                        }}
-                                        onMouseUp={(e) => {
-                                            console.log('mouse up capture');
-                                            isDraggingRef.current = isDragging;
-                                            e.preventDefault();
-                                            e.stopPropagation();
                                         }}
                                     >
                                         {images[i]?.component}
