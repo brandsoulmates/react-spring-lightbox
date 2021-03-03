@@ -52,9 +52,11 @@ const Video = ({ component, pagerIsDragging }: VideoProps) => {
                 e.preventDefault();
                 e.stopPropagation();
             }}
-            onMouseUpCapture={() => {
+            onMouseUpCapture={(e) => {
                 console.log('video mouse up capture');
                 isDragging.current = pagerIsDragging;
+                e.preventDefault();
+                e.stopPropagation();
             }}
         >
             {component}
