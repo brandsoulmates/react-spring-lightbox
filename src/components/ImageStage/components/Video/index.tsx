@@ -23,20 +23,20 @@ const Video = ({ component, pagerIsDragging }: VideoProps) => {
      *
      * @see https://github.com/react-spring/react-use-gesture#usegesture-hook-supporting-multiple-gestures-at-once
      */
-    useGesture({
-        onDrag: ({}) => {
-            if (pagerIsDragging) {
-                isDragging.current = true;
-                return;
-            }
-        },
-        onDragEnd: ({ memo }) => {
-            if (memo !== undefined) {
-                // Add small timeout to prevent onClick handler from firing after drag
-                setTimeout(() => (isDragging.current = false), 100);
-            }
-        },
-    });
+    // useGesture({
+    //     onDrag: ({}) => {
+    //         if (pagerIsDragging) {
+    //             isDragging.current = true;
+    //             return;
+    //         }
+    //     },
+    //     onDragEnd: ({ memo }) => {
+    //         if (memo !== undefined) {
+    //             // Add small timeout to prevent onClick handler from firing after drag
+    //             setTimeout(() => (isDragging.current = false), 100);
+    //         }
+    //     },
+    // });
 
     return (
         <div
