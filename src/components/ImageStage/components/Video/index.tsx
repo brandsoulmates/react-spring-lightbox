@@ -1,9 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { useSpring, animated, to, config } from '@react-spring/web';
+import React, { useRef } from 'react';
+
 import { useGesture } from 'react-use-gesture';
-import styled from 'styled-components';
-import { imageIsOutOfBounds } from '../../utils';
-import type { ImagesListItem } from '../../../../types/ImagesList';
 
 type VideoProps = {
     component: React.Component;
