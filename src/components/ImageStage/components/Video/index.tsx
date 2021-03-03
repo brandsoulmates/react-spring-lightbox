@@ -1,7 +1,5 @@
 import React, { useRef } from 'react';
 
-import { useGesture } from 'react-use-gesture';
-
 type VideoProps = {
     component: React.Component;
     pagerIsDragging: boolean;
