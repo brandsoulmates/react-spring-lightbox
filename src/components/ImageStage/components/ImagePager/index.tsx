@@ -5,6 +5,7 @@ import { useGesture } from 'react-use-gesture';
 import styled from 'styled-components';
 import { useWindowSize } from '../../utils';
 import Image from '../Image';
+import Video from '../Video';
 import type { ImagesList } from '../../../../types/ImagesList';
 
 type IImagePager = {
@@ -196,17 +197,6 @@ const ImagePager = ({
                     onClick={() =>
                         Math.abs(x.getValue()) < 1 && !disableDrag && onClose()
                     }
-                    onClickCapture={(e: React.MouseEvent<HTMLImageElement>) => {
-                        if (
-                            images[i]?.type === 'video' &&
-                            Math.abs(x.getValue()) < 1
-                        ) {
-                            console.log('onclick captured');
-                            e.stopPropagation();
-                            e.nativeEvent.stopImmediatePropagation();
-                            e.preventDefault();
-                        }
-                    }}
                     ref={imageStageRef.current[i]}
                     role="presentation"
                     // @ts-ignore
@@ -226,9 +216,13 @@ const ImagePager = ({
                                 }}
                             >
                                 {images[i]?.type === 'video' ? (
-                                    <VideoContainer isDragging={isDragging}>
-                                        {images[i]?.component}
-                                    </VideoContainer>
+                                    // <VideoContainer isDragging={isDragging}>
+                                    //     {images[i]?.component}
+                                    // </VideoContainer>
+                                    <Video
+                                        component={images[i]?.component}
+                                        pagerIsDragging={isDragging}
+                                    />
                                 ) : (
                                     <Image
                                         imgProps={images[i]}

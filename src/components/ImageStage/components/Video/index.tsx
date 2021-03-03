@@ -1,0 +1,66 @@
+import React, { useEffect, useState, useRef } from 'react';
+import { useSpring, animated, to, config } from '@react-spring/web';
+import { useGesture } from 'react-use-gesture';
+import styled from 'styled-components';
+import { imageIsOutOfBounds } from '../../utils';
+import type { ImagesListItem } from '../../../../types/ImagesList';
+
+type VideoProps = {
+    component: React.Component;
+    pagerIsDragging: boolean;
+};
+
+/**
+ * Animates pinch-zoom + panning on image using spring physics
+ */
+const Video = ({ component, pagerIsDragging }: VideoProps) => {
+    const isDragging = useRef<boolean>(false);
+    /**
+     * Animates scale and translate offsets of Image as they change in gestures
+     *
+     * @see https://www.react-spring.io/docs/hooks/use-spring
+     */
+
+    /**
+     * Update Image scale and translate offsets during pinch/pan gestures
+     *
+     * @see https://github.com/react-spring/react-use-gesture#usegesture-hook-supporting-multiple-gestures-at-once
+     */
+    useGesture({
+        onDrag: ({}) => {
+            if (pagerIsDragging) {
+                isDragging.current = true;
+                return;
+            }
+        },
+        onDragEnd: ({ memo }) => {
+            if (memo !== undefined) {
+                // Add small timeout to prevent onClick handler from firing after drag
+                setTimeout(() => (isDragging.current = false), 100);
+            }
+        },
+    });
+
+    return (
+        <div
+            onClickCapture={(e) => {
+                if (isDragging.current) {
+                    console.log('video click capture');
+                    e.stopPropagation();
+                    e.preventDefault();
+                }
+            }}
+            onMouseDownCapture={(e) => {
+                console.log('video mouse down capture');
+                e.preventDefault();
+                e.stopPropagation();
+            }}
+        >
+            {component}
+        </div>
+    );
+};
+
+Video.displayName = 'Video';
+
+export default Video;
