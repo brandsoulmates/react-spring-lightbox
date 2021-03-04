@@ -216,14 +216,17 @@ const ImagePager = ({
                                 }}
                             >
                                 {images[i]?.type === 'video' ? (
-                                    <VideoContainer isDragging={isDragging}>
-                                        {images[i]?.component}
-                                    </VideoContainer>
+                                    // <VideoContainer isDragging={isDragging}>
+                                    //     {images[i]?.component}
+                                    // </VideoContainer>
+                                    <Video
+                                        component={images[i]?.component}
+                                        handleVideoDragClick={
+                                            images[i]?.handleVideoDragClick
+                                        }
+                                        pagerIsDragging={isDragging}
+                                    />
                                 ) : (
-                                    // <Video
-                                    //     component={images[i]?.component}
-                                    //     pagerIsDragging={isDragging}
-                                    // />
                                     <Image
                                         imgProps={images[i]}
                                         isCurrentImage={i === currentIndex}
@@ -254,9 +257,9 @@ const PagerInnerContentWrapper = styled.div`
     align-items: center;
 `;
 
-const VideoContainer = styled.div<Pick<{ isDragging: boolean }, 'isDragging'>>`
-    ${({ isDragging }) => isDragging && 'pointer-event: none;'}
-`;
+// const VideoContainer = styled.div<Pick<{ isDragging: boolean }, 'isDragging'>>`
+//     ${({ isDragging }) => isDragging && 'pointer-event: none;'}
+// `;
 
 const PagerContentWrapper = styled.div`
     width: 100%;

@@ -3,15 +3,21 @@ import { useDoubleClick } from '../../utils';
 
 type VideoProps = {
     component: React.Component;
+    handleVideoDragClick: () => void;
     pagerIsDragging: boolean;
 };
 
 /**
  * Animates pinch-zoom + panning on image using spring physics
  */
-const Video = ({ component, pagerIsDragging }: VideoProps) => {
+const Video = ({
+    component,
+    handleVideoDragClick,
+    pagerIsDragging,
+}: VideoProps) => {
     // const isDragging = useRef<boolean>(false);
     const videoRef = useRef<HTMLInputElement>(null);
+
     /**
      * Animates scale and translate offsets of Image as they change in gestures
      *
@@ -41,12 +47,10 @@ const Video = ({ component, pagerIsDragging }: VideoProps) => {
     useDoubleClick({
         capture: true,
         latency: 0,
-        ['onSingleClick']: (e: MouseEvent) => {
+        ['onSingleClick']: () => {
             if (pagerIsDragging) {
                 console.log("IT'S CLICKING");
-                e.stopPropagation();
-                e.preventDefault();
-                e.stopImmediatePropagation();
+                handleVideoDragClick();
 
                 return;
             }

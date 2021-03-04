@@ -4,6 +4,7 @@ export type ImagesListItem = Omit<
 > & {
     alt: string;
     component: React.Component;
+    handleVideoDragClick: () => void;
     loading?: 'auto' | 'eager' | 'lazy';
     src: string;
 };
