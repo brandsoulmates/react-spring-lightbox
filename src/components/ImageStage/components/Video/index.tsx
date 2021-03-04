@@ -11,7 +11,7 @@ type VideoProps = {
  */
 const Video = ({ component, pagerIsDragging }: VideoProps) => {
     // const isDragging = useRef<boolean>(false);
-    const videoRef = useRef<HTMLImageElement>(null);
+    const videoRef = useRef<HTMLInputElement>(null);
     /**
      * Animates scale and translate offsets of Image as they change in gestures
      *
@@ -43,10 +43,14 @@ const Video = ({ component, pagerIsDragging }: VideoProps) => {
             if (pagerIsDragging) {
                 console.log("IT'S CLICKING");
                 e.stopPropagation();
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                if (videoRef?.current)
+                    videoRef.current.querySelector('.video-js')?.pause();
                 return;
             }
         },
-        latency: 0,
+        latency: 200,
         ref: videoRef,
     });
 
