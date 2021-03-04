@@ -47,8 +47,6 @@ const ImagePager = ({
     const [pagerHeight, setPagerHeight] = useState<'100%' | number>('100%');
     const [isDragging, setIsDragging] = useState<boolean>(false);
 
-    console.log('Dragging lightbox ', isDragging);
-
     // Generate page positions based on current index
     const getPagePositions = (i: number, down = false, xDelta = 0) => {
         const x = (i - currentIndex) * pageWidth + (down ? xDelta : 0);
@@ -216,9 +214,6 @@ const ImagePager = ({
                                 }}
                             >
                                 {images[i]?.type === 'video' ? (
-                                    // <VideoContainer isDragging={isDragging}>
-                                    //     {images[i]?.component}
-                                    // </VideoContainer>
                                     <Video
                                         component={images[i]?.component}
                                         handleVideoDragClick={
@@ -256,10 +251,6 @@ const PagerInnerContentWrapper = styled.div`
     justify-content: center;
     align-items: center;
 `;
-
-// const VideoContainer = styled.div<Pick<{ isDragging: boolean }, 'isDragging'>>`
-//     ${({ isDragging }) => isDragging && 'pointer-event: none;'}
-// `;
 
 const PagerContentWrapper = styled.div`
     width: 100%;
