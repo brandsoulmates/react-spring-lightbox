@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import { useDoubleClick } from '../../utils';
 
 type VideoProps = {
     component: React.Component;
