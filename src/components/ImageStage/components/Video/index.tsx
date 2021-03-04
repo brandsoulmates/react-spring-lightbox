@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useDoubleClick } from '../../utils';
 
 type VideoProps = {
     component: React.Component;
@@ -9,8 +10,8 @@ type VideoProps = {
  * Animates pinch-zoom + panning on image using spring physics
  */
 const Video = ({ component, pagerIsDragging }: VideoProps) => {
-    const isDragging = useRef<boolean>(false);
-    // const videoRef = useRef<HTMLInputElement>(null);
+    // const isDragging = useRef<boolean>(false);
+    const videoRef = useRef<HTMLInputElement>(null);
     /**
      * Animates scale and translate offsets of Image as they change in gestures
      *
@@ -37,52 +38,47 @@ const Video = ({ component, pagerIsDragging }: VideoProps) => {
     //     },
     // });
 
-    // useDoubleClick({
-    //     ['onSingleClick']: (e: MouseEvent) => {
-    //         if (pagerIsDragging) {
-    //             console.log("IT'S CLICKING");
-    //             e.stopPropagation();
-    //             e.preventDefault();
-    //             e.stopImmediatePropagation();
-    //             e.nativeEvent.stopImmediatePropagation();
-    //             return;
-    //         }
-    //     },
-    //     latency: 0,
-    //     ref: videoRef,
-    // });
+    useDoubleClick({
+        capture: true,
+        latency: 0,
+        ['onSingleClick']: (e: MouseEvent) => {
+            if (pagerIsDragging) {
+                console.log("IT'S CLICKING");
+                e.stopPropagation();
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                return;
+            }
+        },
+
+        ref: videoRef,
+    });
 
     return (
         <div
-            onClick={() => console.log('NORMAL ONCLICK')}
-            onClickCapture={(e) => {
-                console.log('video click capture preventing default');
-                e.stopPropagation();
-                e.preventDefault();
-                e.nativeEvent.stopImmediatePropagation();
-                if (isDragging.current) {
-                    console.log('video click capture is dragging');
-                    e.stopPropagation();
-                    e.preventDefault();
-                    e.nativeEvent.stopImmediatePropagation();
-                }
-            }}
-            onMouseDownCapture={(e) => {
-                isDragging.current = true;
-                console.log('video mouse down capture');
-                e.preventDefault();
-                e.stopPropagation();
-                e.nativeEvent.stopImmediatePropagation();
-            }}
-            onMouseUpCapture={(e) => {
-                console.log('video mouse up capture');
-                isDragging.current = pagerIsDragging;
-                e.preventDefault();
-                e.stopPropagation();
-                e.nativeEvent.stopImmediatePropagation();
-            }}
-
-            // ref={videoRef}
+            // onClickCapture={(e) => {
+            //     console.log('video click capture preventing default');
+            //     e.stopPropagation();
+            //     e.preventDefault();
+            //     if (isDragging.current) {
+            //         console.log('video click capture is dragging');
+            //         e.stopPropagation();
+            //         e.preventDefault();
+            //     }
+            // }}
+            // onMouseDownCapture={(e) => {
+            //     isDragging.current = true;
+            //     console.log('video mouse down capture');
+            //     e.preventDefault();
+            //     e.stopPropagation();
+            // }}
+            // onMouseUpCapture={(e) => {
+            //     console.log('video mouse up capture');
+            //     isDragging.current = pagerIsDragging;
+            //     e.preventDefault();
+            //     e.stopPropagation();
+            // }}
+            ref={videoRef}
         >
             {component}
         </div>
