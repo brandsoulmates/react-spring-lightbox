@@ -47,6 +47,7 @@ const Video = ({ component, pagerIsDragging }: VideoProps) => {
                 e.stopPropagation();
                 e.preventDefault();
                 e.stopImmediatePropagation();
+
                 return;
             }
         },
